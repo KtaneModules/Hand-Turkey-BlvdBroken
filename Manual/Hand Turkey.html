@@ -23,7 +23,7 @@
         .bgp { background-color: hotpink; }
 
         .page-footer::before { content: 'Page '; }
-        .page-footer::after { content: ' of 2'; }
+        .page-footer::after { content: ' of 3'; }
     </style>
 </head>
 <body>
@@ -37,7 +37,7 @@
                 <img src="img/Component/Hand Turkey.svg" class="diagram">
                 <h2>On the Subject of Hand Turkeys</h2>
                 <p class="flavour-text">Mrs. King, I’ve brought you in to talk about your son’s behavior in class. For our Thanksgiving assignment, Brendan wrote that he was thankful for... Latinas?</p>
-                <p>After a long night at the Thanksgiving table, Grandpapi King gathers everyone around and asks what they were thankful for this year. Not quite sure how to answer, you decide make a hand turkey and let the winds of creativity decide what you were thankful for. The order in which you paint your hand turkey fingers is determined by what you had at the dinner table today, starting at the thumb and going clockwise.</p>
+                <p>After a long night at the Thanksgiving table, Grandpapi King gathers everyone around and asks what they were thankful for this year. Not quite sure how to answer, you decide to make a hand turkey and let the winds of creativity decide what you were thankful for. The order in which you paint your hand turkey fingers is determined by what you had at the dinner table today, going in reading order.</p>
                 <table>
                     <tr>
                         <td>Brown</td>
@@ -58,9 +58,14 @@
                         <td>Benadryl</td>
                     </tr>
                 </table>
-                <p>Using the rules below, navigate the grid to get what you were thankful for this year. If you have a voltage meter on your bomb, your starting row is determined by the voltage of the bomb, rounded down, modulo 7. Otherwise, your starting row is determined by the number of letters in the color of your second finger and the name of the fourth item you grabbed, modulo 7. Your starting column is determined by today’s concatenated date (MMDDYYYY) modulo 7.</p>
-                <table style = "width:55%">
-                    <tr style = "height:55px">
+                <p>
+                    Using the rules below, navigate the grid to come up with what you were thankful for this year. 
+                    If you have a voltage meter on your bomb, your starting row is determined by the voltage of the bomb, rounded down, modulo 7, plus one. 
+                    Otherwise, your starting row is determined by the number of letters in the color of your second finger and the name of the fourth item you grabbed, modulo 7, plus one. 
+                    Your starting column is determined by today’s concatenated date (MMDDYYYY) modulo 7, plus one.
+                </p>
+                <table style = "width:50%">
+                    <tr style = "height:50px">
                         <td class = bgn></td>
                         <td class = bgy></td>
                         <td class = bgb></td>
@@ -69,7 +74,7 @@
                         <td class = bgg></td>
                         <td class = bgp></td>
                     </tr>
-                    <tr style = "height:55px">
+                    <tr style = "height:50px">
                         <td class = bgg></td>
                         <td class = bgp></td>
                         <td class = bgg></td>
@@ -78,7 +83,7 @@
                         <td class = bgn></td>
                         <td class = bgr></td>
                     </tr>
-                    <tr style = "height:55px">
+                    <tr style = "height:50px">
                         <td class = bgr></td>
                         <td class = bgg></td>
                         <td class = bgn></td>
@@ -87,7 +92,7 @@
                         <td class = bgb></td>
                         <td class = bgy></td>
                     </tr>
-                    <tr style = "height:55px">
+                    <tr style = "height:50px">
                         <td class = bgr></td>
                         <td class = bgo></td>
                         <td class = bgr></td>
@@ -96,7 +101,7 @@
                         <td class = bgo></td>
                         <td class = bgy></td>
                     </tr>
-                    <tr style = "height:55px">
+                    <tr style = "height:50px">
                         <td class = bgn></td>
                         <td class = bgo></td>
                         <td class = bgy></td>
@@ -105,7 +110,7 @@
                         <td class = bgn></td>
                         <td class = bgg></td>
                     </tr>
-                    <tr style = "height:55px">
+                    <tr style = "height:50px">
                         <td class = bgb></td>
                         <td class = bgb></td>
                         <td class = bgo></td>
@@ -114,7 +119,7 @@
                         <td class = bgp></td>
                         <td class = bgg></td>
                     </tr>
-                    <tr style = "height:55px">
+                    <tr style = "height:50px">
                         <td class = bgr></td>
                         <td class = bgb></td>
                         <td class = bgy></td>
@@ -137,18 +142,31 @@
                 <ul>
                     <li>If you grabbed becherovka first, you’re an alcoholic. Move down four spaces.</li>
                     <li>If you grabbed cranberry sauce, pumpkin pie, and lemonade, you’re on a sugar high. Move up three spaces.</li>
-                    <li>If you grabbed something more than once, move twice in the direction of the closest cell with that item directly orthogonal to the current cell, with ties being broken starting from the left and going clockwise.</li>
-                    <li>If you grabbed four different items, you are feeling festive. Move to the opposite cell relative to what the starting position would be if a bomb with a voltage of 20 was started on Thanksgiving of this year.</li>
+                    <li>If you grabbed something more than once, move twice in the direction of the closest cell with that item (the leftmost, if more than one item was grabbed multiple times) directly orthogonal to the current cell, with ties being broken starting from the left and going clockwise. If there is none of that item in any orthogonal direction of your current position, do not move. You were dreaming when you grabbed it.</li>
+                    <li>If you grabbed four different items, you are feeling festive. Move in reading order a number of times equal to the Manhattan distance between the current position and what the starting position would be if a bomb with a voltage equivalent to the number of days since last February 29th modulo 10 was started on Thanksgiving* of last year.</li>
                     <li>If you grabbed turkey or cranberry sauce last, you are taking home leftovers. Move left a number of times equal to the number of food items (turkey, cranberry sauce, quahogs, and pumpkin pie) in your current column.</li>
-                    <li>If you grabbed quahogs and benadryl, you are having an allergic reaction to shellfish. Divide your current row and column by 2, rounding up, and add 2 to each.</li>
-                    <li>If you did not have any cranberry sauce, lemonade, or becherovka, you have dry lips. Find the movements to get to the closest corner, with ties being broken in reading order, and then move in the opposite direction. Then, lick your lips, you dry ass lip haver.</li>
-                    <li>If you grabbed three or more total of turkey or pumpkin pie, you just came back from a “walk”. Consider all of the movements a knight could make from your current position. Starting with the position directly clockwise of north, choose the nth (where n is battery holders + indicators + 1) movement clockwise, skipping over a number of movements determined by the number of ports.</li>
-                    <li>If you had more than three benadryls, you are experiencing a terrible nightmare. Move left, northwest, southwest, right, up, right, left, down, and finally move to the position diametrically opposite of the position you end up in order to evade the Hat Man.</li>
+                    <li>If you grabbed quahogs and benadryl, you are having an allergic reaction to shellfish. Divide your current row and column by 2, rounding down, and add 2 to each.</li>
+                    <li>If you did not have any cranberry sauce, lemonade, or becherovka, you have dry lips. Find the movements to get from the closest corner, with ties being broken in reading order, to the current position, and make those movements. Then, lick your lips, you dry lips haver.</li>
+                    <li>If you grabbed three or more total of turkey or pumpkin pie, you just came back from a “walk”. Consider all of the movements a knight could make from your current position without leaving the table. Starting with the position clockwise of north, choose the nth (where n is battery holders + indicators) movement clockwise, skipping over a number of movements determined by the number of ports each time.</li>
+                    <li>If you had three or more benadryls, you are experiencing a terrible nightmare. Move left, northwest, southwest, right, up, right, left, down, and finally move to the position diametrically opposite of the position you end up in, in order to evade the Hat Man.</li>
                 </ul>
-                <p>After moving according to each applicable rule, assign the colors on odd-numbered fingers “left”, the colors on even-numbered fingers “right”, and any color not on a finger as “up”. Starting from your current position, make the movement assigned to that color in the grid (10 - number of above rules followed) times. The position you finish on is your final position.</p>
-                <p>Press a finger with the color of your final position. If a finger does not have that color, press the mouth to reuse an answer from last year.</p>
             </div>
             <div class="page-footer relative-footer">2</div>
+        </div>
+
+        <div class="page page-bg-03">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">Hand Turkey</span>
+            </div>
+            <div class="page-content">
+                <p>After moving according to each applicable rule, assign the colors on odd-numbered fingers “left”, the colors on even-numbered fingers “right”, and any color not on a finger as “up”, in standard finger counting order**, with earlier fingers being overwritten by latter fingers. Starting from your current position, make the movement assigned to that color in the grid (10 - number of above rules followed) times. The position you finish on is your final position.</p>
+                <p>Press a finger with the color of your final position. If a finger does not have that color, press the mouth to reuse an answer from last year.</p>
+                <br></br>
+                <p style="font-size: 75%;">* This module is based on American Thanksgiving, which is on the fourth Thursday of every November. Not to be confused with Canadian Thanksgiving, which is on the second Monday of Octobers, or Detroit Thanksgiving, which is on the rare occurance of the Lions winning a playoffs game.</p>
+                <p style="font-size: 75%;">** Standard finger counting order starts with your pointer finger, goes left to your pinky, and then ends with your thumb. You may count on your fingers in a different way, just know that you are wrong.</p>
+            </div>
+            <div class="page-footer relative-footer">3</div>
         </div>
     </div>
 </body>
