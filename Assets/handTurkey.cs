@@ -442,17 +442,49 @@ public class handTurkey : MonoBehaviour
 
     // Twitch Plays
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = "!{0} cycle # [Presses the arrow button # times] !{0} write [Presses the letter button] !{0} switch [Long presses the arrow button]";
+    private readonly string TwitchHelpMessage = "!{0} press <1-4> [Presses the specified finger in standard finger counting order] | !{0} mouth [Presses the mouth]";
 #pragma warning restore 414
 
     private IEnumerator ProcessTwitchCommand(string input)
     {
         input = input.Trim().ToLowerInvariant();
-        yield return null;
+        switch (input)
+        {
+            case "mouth":
+                yield return null;
+                beak.OnInteract();
+                break;
+            case "press 1":
+                yield return null;
+                featherSelects[3].OnInteract();
+                break;
+            case "press 2":
+                yield return null;
+                featherSelects[2].OnInteract();
+                break;
+            case "press 3":
+                yield return null;
+                featherSelects[1].OnInteract();
+                break;
+            case "press 4":
+                yield return null;
+                featherSelects[0].OnInteract();
+                break;
+        }
     }
 
     private IEnumerator TwitchHandleForcedSolve()
     {
-        yield return null;
+        for (int i = 0; i < featherColorIndices.Length; i++)
+        {
+            if (colorTable[position.Current] == featherColorIndices[i])
+            {
+                featherSelects[i].OnInteract();
+                yield return new WaitForSeconds(.1f);
+                yield break;
+            }
+        }
+        beak.OnInteract();
+        yield return new WaitForSeconds(.1f);
     }
 }
