@@ -39,7 +39,7 @@ public class handTurkey : MonoBehaviour
 
     private void Awake()
     {
-        Debug.LogFormat("Got to Awake");
+        //Debug.LogFormat("Got to Awake");
         moduleId = moduleIdCounter++;
         for (int i = 0; i < 4; i++)
 		{
@@ -280,9 +280,9 @@ public class handTurkey : MonoBehaviour
         // If you grabbed quahogs and benadryl...
         if (featherColorIndices.Contains(5) && featherColorIndices.Contains(6))
         {
-            DebugOut("You are allergic to shellfish. Divide your current row and column by 2, rounding down, and add 2 to each.");
-            position.ShiftCol((position.Col / -2) + 2);
-            DebugOut(position.ShiftRow((position.Row / -2) + 2));
+            DebugOut("You are allergic to shellfish. Divide your current row and column by 2, rounding up, and add 2 to each.");
+            position.ShiftCol(((position.Col + 1) / -2) + 2);
+            DebugOut(position.ShiftRow(((position.Row + 1) / -2) + 2));
             followed++;
         }
         // If you did not have any cranberry sauce, lemonade, or becherovka...
@@ -442,7 +442,8 @@ public class handTurkey : MonoBehaviour
 
     // Twitch Plays
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = "!{0} press <1-4> [Presses the specified finger in standard finger counting order] | !{0} mouth [Presses the mouth]";
+    private readonly string TwitchHelpMessage = "!{0} press <1-4> [Presses the finger in reading order.] | !{0} <finger> [Presses the named finger. Fingers are pinky, ring, middle, and pointer.] | !{0} beak or !{0} mouth [Presses the beak.]";
+
 #pragma warning restore 414
 
     private IEnumerator ProcessTwitchCommand(string input)
@@ -450,25 +451,25 @@ public class handTurkey : MonoBehaviour
         input = input.Trim().ToLowerInvariant();
         switch (input)
         {
-            case "mouth":
+            case "beak": case "mouth":
                 yield return null;
                 beak.OnInteract();
                 break;
-            case "press 1":
+            case "pinky": case "press 1":
                 yield return null;
-                featherSelects[3].OnInteract();
+                featherSelects[0].OnInteract();
                 break;
-            case "press 2":
-                yield return null;
-                featherSelects[2].OnInteract();
-                break;
-            case "press 3":
+            case "ring": case "press 2":
                 yield return null;
                 featherSelects[1].OnInteract();
                 break;
-            case "press 4":
+            case "middle": case "press 3":
                 yield return null;
-                featherSelects[0].OnInteract();
+                featherSelects[2].OnInteract();
+                break;
+            case "pointer": case "press 4":
+                yield return null;
+                featherSelects[3].OnInteract();
                 break;
         }
     }

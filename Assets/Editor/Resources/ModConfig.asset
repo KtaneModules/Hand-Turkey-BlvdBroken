@@ -17,6 +17,6 @@ MonoBehaviour:
   description: "No wonder the soup was so expensive this year, it had 24 carrots.\r\n\r\nModule
     idea and implementation by BlvdBroken, model and coding by TasThiluna.\r\n\r\n[url=https://ktane.timwi.de/HTML/Hand%20Turkey.html]Manual
     HTML[/url]\r\n[url=https://ktane.timwi.de/PDF/Hand%20Turkey.pdf]Manual PDF[/url]"
-  version: 2.0
+  version: 2.3
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 8983eb0d9530dfa4296cb44dc2fe08dc, type: 3}
